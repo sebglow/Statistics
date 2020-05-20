@@ -1,0 +1,43 @@
+version: '3.7'
+
+networks:
+  dockerapi-dev:
+    driver: bridge
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2017-latest
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: MasterPassword1!
+      MSSQL_DB: SebGlowDb
+      MSSQL_USER: sebglow
+      MSSQL_PASSWORD: Password1!
+    networks:
+      - dockerapi-dev   
+    ports:
+      - "1433:1433"
+      - "1434:1434"
+    expose:
+      - "1433"
+      - "1434"
+  api:
+    build:
+      context: .
+      dockerfile: SebGlow.Api/Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - dockerapi-dev      
+    volumes:
+      - ./SebGlow.Api/https:/https:ro
+    environment:
+      - ADD_DB_CONTEXT=SqlServer
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=http://+:80
+#      - ASPNETCORE_URLS=https://+:443;http://+:80
+#      - ASPNETCORE_Kestrel__Certificates__Default__Password=Password1!
+#      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/iisexpress.pfx
+    depends_on:
+      - db

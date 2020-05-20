@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.1.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.1.16" />
+    <PackageReference Include="Moq" Version="4.13.1" />
+    <PackageReference Include="nunit" Version="3.10.1" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SebGlow.Api\SebGlow.Api.csproj" />
+    <ProjectReference Include="..\SebGlow.DataAccess\SebGlow.DataAccess.csproj" />
+    <ProjectReference Include="..\SebGlow.Service\SebGlow.Service.csproj" />
+  </ItemGroup>
+
+</Project>
